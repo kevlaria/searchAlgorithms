@@ -1,0 +1,29 @@
+Sorting Algorithms Findings
+
+***Table of Contents
+1. Findings
+2. Methodology
+3. Other details
+
+***1. Findings
+(all times in microseconds)
+
+Sort type		|	N = 2,500		| 	N = 5,000		| 	N = 10,000		|	N = 100,000
+********************************************************************************************
+Bubble Sort		| 	6,950			|	42,919			| 	180,932			| 	15,459,474
+Selection Sort	| 	1,918			| 	7,301			| 	27,731			| 	2,721,875
+Insertion Sort	| 	1,006			|	2,951			| 	11,491			| 	1,142,858
+Quicksort		|	267				| 	399				| 	763				|	8,661
+
+***2. Methodology
+
+All other programs were closed prior to the experiment
+
+For each sorting technique:
+- A random array of N numbers were generated. Numbers included repeats and negative numbers.
+- 30 trials were conducted on this array
+- The array was first randomly sorted
+- System.gc() (Garbage collection) was run
+- Timer was started just before sort method is called
+- Timer was stopped when sort method completes
+- Average time of 30 trials was taken - when calculating the average, the slowest and fastest times were removed as potential anomalies
