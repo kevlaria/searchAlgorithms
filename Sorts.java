@@ -1,12 +1,13 @@
 package sortingAlgorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Program to run 4 sort algorithms: Bubble Sort, Selection Sort, Insertion Sort
+ * Program to run 5 sort algorithms: Bubble Sort, Selection Sort, Insertion Sort, Shell Sort
  * and Quicksort.
  * 
  * @author Kevin Lee
@@ -175,7 +176,7 @@ public class Sorts {
 	}
 	
 	/**
-	 *  Sorts an array of numbers using Shell Sort
+	 * Sorts an array of numbers using Shell Sort
 	 * 
 	 * @param numbers
 	 *            - Array of numbers to be sorted
@@ -190,12 +191,14 @@ public class Sorts {
 		while (h >= 1){
 			for (int i = h; i < len; i++){
 				for (int j = i; j >= h && (numbers[j] < numbers[j-h]); j-=h){
+
 					int temp = numbers[j];
 					numbers[j] = numbers[j-h];
 					numbers[j-h] = temp;
+
 				}
-				h = h/3;
 			}
+			h = h/3;
 		}
 		
 	}
@@ -299,7 +302,7 @@ public class Sorts {
 		long average = getAverages(times);
 		return average;
 	}
-
+	
 	/**
 	 * Initiates tests for Shell Sort. Includes randomization of array and timing
 	 * 
@@ -308,7 +311,6 @@ public class Sorts {
 	 * @param repeats
 	 *            - number of times to sort the array
 	 * @return - The average time taken to sort
-
 	 */
 	public long runShellSort(int[] numbers, int repeats) {
 		ArrayList<Long> times = new ArrayList<Long>();
@@ -324,7 +326,6 @@ public class Sorts {
 		return average;
 	}
 
-	
 	/*****
 	 * Input methods 
 	 * *****
@@ -357,7 +358,7 @@ public class Sorts {
 		case 4:
 			averageTime = runQuicksort(numbers, REPEATS);
 			break;
-		case 5:
+		default:
 			averageTime = runShellSort(numbers, REPEATS);
 			break;
 		}
@@ -415,7 +416,7 @@ public class Sorts {
 
 	/**
 	 * Allows user to select either: 
-	 * - sort type (Bubble Sort / Selection Sort / Insertion Sort / Quicksort); or 
+	 * - sort type (Bubble Sort / Selection Sort / Insertion Sort / Quicksort / Shell Sort); or 
 	 * - array size (2.5k, 5k, 10k, or 100k) (based on value of "purpose" parameter)
 	 * 
 	 * @param scanner
@@ -444,8 +445,6 @@ public class Sorts {
 		return selection;
 	}
 
-
-	
 	/******
 	 * Utility methods *******
 	 */
@@ -497,7 +496,7 @@ public class Sorts {
 	 * 
 	 * @param input
 	 *            - Text that is input
-	 * @return - True if input = 1, 2, 3, 4, 5
+	 * @return - True if input = 1, 2, 3, 4, 5.
 	 */
 	public static boolean isValid(String input) {
 		if (input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5"))

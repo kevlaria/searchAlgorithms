@@ -283,6 +283,58 @@ public class SortsTest {
 		Arrays.sort(largeArrayCopy);
 		assertArrayEquals(largeArrayCopy, largeArray);
 	}
+	
+	
+	
+	
+	/**
+	 * Shell Sort test methods
+	 */
+
+	@Test
+	public void testShellSortSmall() {
+		Sorts.randomize(smallArray);
+		int[] smallArrayCopy = smallArray.clone();
+		Sorts.shellSort(smallArray);
+		Arrays.sort(smallArrayCopy);
+		assertArrayEquals(smallArrayCopy, smallArray);
+	}
+
+	@Test
+	public void testShellSortNone() {
+		Sorts.randomize(noArray);
+		int[] noArrayCopy = noArray.clone();
+		Sorts.shellSort(noArray);
+		Arrays.sort(noArrayCopy);
+		assertArrayEquals(noArrayCopy, noArray);
+	}
+
+	@Test
+	public void testShellSortTinyArray() {
+		Sorts.randomize(tinyArray);
+		int[] tinyArrayCopy = tinyArray.clone();
+		Sorts.shellSort(tinyArray);
+		Arrays.sort(tinyArrayCopy);
+		assertArrayEquals(tinyArrayCopy, tinyArray);
+	}
+
+	@Test
+	public void testShellSortRepeatArray() {
+		Sorts.randomize(repeatArray);
+		int[] repeatArrayCopy = repeatArray.clone();
+		Sorts.shellSort(repeatArray);
+		Arrays.sort(repeatArrayCopy);
+		assertArrayEquals(repeatArrayCopy, repeatArray);
+	}
+
+	@Test
+	public void testShellSortLargeArray() {
+		Sorts.randomize(largeArray);
+		int[] largeArrayCopy = largeArray.clone();
+		Sorts.shellSort(largeArray);
+		Arrays.sort(largeArrayCopy);
+		assertArrayEquals(largeArrayCopy, largeArray);
+	}
 
 	/**
 	 * Other test methods
@@ -324,7 +376,7 @@ public class SortsTest {
 	public void testIsValid() {
 		assertTrue(Sorts.isValid("1"));
 		assertTrue(Sorts.isValid("2"));
-		assertFalse(Sorts.isValid("5"));
+		assertFalse(Sorts.isValid("-1"));
 		assertFalse(Sorts.isValid("a"));
 	}
 }
