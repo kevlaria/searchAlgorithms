@@ -173,6 +173,32 @@ public class Sorts {
 			numbers[min] = temp;
 		}
 	}
+	
+	/**
+	 *  Sorts an array of numbers using Shell Sort
+	 * 
+	 * @param numbers
+	 *            - Array of numbers to be sorted
+	 */
+	public static void shellSort(int[] numbers){
+		if (numbers == null) return;
+		
+		int len = numbers.length;
+		if (len < 2) return;
+		int h = 1;
+		while (h < len / 3) h = 3 * h + 1;
+		while (h >= 1){
+			for (int i = h; i < len; i++){
+				for (int j = i; j >= h && (numbers[j] < numbers[j-h]); j-=h){
+					int temp = numbers[j];
+					numbers[j] = numbers[j-h];
+					numbers[j-h] = temp;
+				}
+				h = h/3;
+			}
+		}
+		
+	}
 
 	/******
 	 * Sort wrapper methods 
@@ -274,6 +300,31 @@ public class Sorts {
 		return average;
 	}
 
+	/**
+	 * Initiates tests for Shell Sort. Includes randomization of array and timing
+	 * 
+	 * @param numbers
+	 *            - array of numbers to sort
+	 * @param repeats
+	 *            - number of times to sort the array
+	 * @return - The average time taken to sort
+
+	 */
+	public long runShellSort(int[] numbers, int repeats) {
+		ArrayList<Long> times = new ArrayList<Long>();
+		for (int i = 0; i < repeats; i++) {
+			randomize(numbers);
+			System.gc();
+			long startTime = System.nanoTime();
+			shellSort(numbers);
+			long elapsedTime = System.nanoTime() - startTime;
+			times.add(elapsedTime);
+		}
+		long average = getAverages(times);
+		return average;
+	}
+
+	
 	/*****
 	 * Input methods 
 	 * *****
@@ -303,8 +354,11 @@ public class Sorts {
 		case 3:
 			averageTime = runInsertionSort(numbers, REPEATS);
 			break;
-		default:
+		case 4:
 			averageTime = runQuicksort(numbers, REPEATS);
+			break;
+		case 5:
+			averageTime = runShellSort(numbers, REPEATS);
 			break;
 		}
 		return averageTime / (long) 1000;
@@ -376,7 +430,7 @@ public class Sorts {
 		while (!valid) {
 			if (purpose.equals("sortType")) {
 				System.out
-						.println("Select type of sort:\n\t1. Bubble Sort\n\t2. Selection Sort\n\t3. Insertion Sort\n\t4. Quicksort\nSelect 1, 2, 3 or 4: ");
+						.println("Select type of sort:\n\t1. Bubble Sort\n\t2. Selection Sort\n\t3. Insertion Sort\n\t4. Quicksort\n\t5. Shell Sort\nSelect 1, 2, 3, 4 or 5: ");
 			} else if (purpose.equals("arraySize")) {
 				System.out
 						.println("Select size of array:\n\t1. 2,500\n\t2. 5,000\n\t3. 10,000\n\t4. 100,000\nSelect 1, 2, 3 or 4: ");
@@ -390,6 +444,8 @@ public class Sorts {
 		return selection;
 	}
 
+
+	
 	/******
 	 * Utility methods *******
 	 */
@@ -437,14 +493,14 @@ public class Sorts {
 	}
 
 	/**
-	 * Determines whether an input is valid (ie 1, 2, 3 or 4)
+	 * Determines whether an input is valid
 	 * 
 	 * @param input
 	 *            - Text that is input
-	 * @return - True if input = 1, 2, 3 or 4.
+	 * @return - True if input = 1, 2, 3, 4, 5
 	 */
 	public static boolean isValid(String input) {
-		if (input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4"))
+		if (input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5"))
 			return true;
 		return false;
 	}
